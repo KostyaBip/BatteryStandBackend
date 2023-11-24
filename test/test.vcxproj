@@ -132,14 +132,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="battery.cpp" />
+    <ClCompile Include="batteryManager.cpp" />
+    <ClCompile Include="documentManager.cpp" />
     <ClCompile Include="libmodbus\modbus-data.c" />
     <ClCompile Include="libmodbus\modbus-rtu.c" />
     <ClCompile Include="libmodbus\modbus-tcp.c" />
     <ClCompile Include="libmodbus\modbus.c" />
     <ClCompile Include="Messanger.cpp" />
+    <ClCompile Include="modbusMaster.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="battery.h" />
+    <ClInclude Include="batteryManager.h" />
+    <ClInclude Include="documentManager.h" />
     <ClInclude Include="libmodbus\config.h" />
     <ClInclude Include="libmodbus\modbus-private.h" />
     <ClInclude Include="libmodbus\modbus-rtu-private.h" />
@@ -149,6 +156,7 @@
     <ClInclude Include="libmodbus\modbus-version.h" />
     <ClInclude Include="libmodbus\modbus.h" />
     <ClInclude Include="Messanger.h" />
+    <ClInclude Include="modbusMaster.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="modbus.rc" />

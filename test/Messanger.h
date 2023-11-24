@@ -1,8 +1,10 @@
 #pragma once
+#include <string>
 class Messanger
 {
 public:
 	Messanger();
-	void MessageFromPipe();
+	std::string getMessageFromPipe();
+	void sendMessageToPipe(std::string message);
 };
 

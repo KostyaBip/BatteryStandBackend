@@ -6,7 +6,7 @@
 
 Messanger::Messanger() {}
 
-void Messanger::MessageFromPipe() {
+std::string Messanger::getMessageFromPipe() {
 
     char errorMessage[] = {"Error"};
 
@@ -51,6 +51,42 @@ void Messanger::MessageFromPipe() {
         buffer[bytesRead] = '\0';
         std::cout << "Message received: " << buffer << std::endl;
         //return buffer;
+    }
+
+    CloseHandle(hPipe);
+
+    std::string str(buffer);
+    return str;
+}
+
+void Messanger::sendMessageToPipe(std::string message) {
+    HANDLE hPipe;
+    const char* pipeName = "\\\\.\\pipe\\MyNamedPipe"; // Уникальное имя канала
+
+    hPipe = CreateFileA(
+        pipeName,                    // Имя канала
+        GENERIC_WRITE,               // Права доступа
+        0,                           // Флаги и атрибуты
+        NULL,                        // Структура защиты (NULL означает использование стандартной защиты)
+        OPEN_EXISTING,               // Открываем существующий канал
+        0,                           // Флаги асинхронного режима (0 для синхронного режима)
+        NULL                         // Дескриптор шаблона файла (не используется)
+    );
+
+    if (hPipe == INVALID_HANDLE_VALUE) {
+        std::cerr << "Failed to open pipe. Error code: " << GetLastError() << std::endl;
+        //return 1;
+    }
+
+    //std::string message = "Message from pipe!";
+    DWORD bytesWritten;
+    BOOL result = WriteFile(hPipe, message.c_str(), message.size(), &bytesWritten, NULL);
+
+    if (!result) {
+        std::cerr << "Failed to write to pipe. Error code: " << GetLastError() << std::endl;
+    }
+    else {
+        std::cout << "Message sent: " << message << std::endl;
     }
 
     CloseHandle(hPipe);
